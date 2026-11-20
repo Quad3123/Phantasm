@@ -19,6 +19,15 @@
 #
 
 
+
+
+# IMPORTS
+import re
+
+
+
+
+
 validCommands = [
     "+",
     "-",
@@ -48,8 +57,19 @@ validCommands = [
 
 
 
-
+# takes in the code and checks it's valid
 code = input()
 
 if len(code) == 0: print("ERROR: no code") ; quit()
-if not code[0].isdecimal() and not code.startswith(tuple(validCommands)): print("ERROR: invalid start") ; quit()
+if code[0].isdecimal(): # gets the header, if there is one
+    match = re.match(r"^(\d+)\s+(\d+)(.*)$", code)
+    if match: headerLeft, headerRight, code = match.groups() ; int(headerLeft) ; int(headerRight)
+
+
+
+
+
+
+# more validation
+if not code[0].isdecimal(): print("ERROR: invalid start") ; quit()
+if not code.startswith(tuple(validCommands)): print("ERROR: ")
