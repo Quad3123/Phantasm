@@ -65,8 +65,8 @@ and `\->(+` would be executed as `+)<-/`
 
 
 #### Initial State
-The initial state is defined by a number, then a space, then a number at the start of the code  
-The numbers signify the amount of Es to the left and right of the P  
+The initial state is defined by a number, then a space, then a number at the start of the code, known as Headers  
+The Headers signify the amount of Es to the left and right of the P  
 For example "1 2" would result in: `... 0 | 0 P0 0 0 | 0 ...`
 If no initial state is included, it will be 0 0, which is `... 0 | P0 | 0 ...`
 

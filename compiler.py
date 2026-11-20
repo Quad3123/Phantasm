@@ -57,15 +57,16 @@ validCommands = [
 
 
 
-# takes in the code and checks it's valid
+
 code = input()
 
-if len(code) == 0: print("ERROR: no code") ; quit()
-if code[0].isdecimal(): # gets the header, if there is one
-    match = re.match(r"^(\d+)\s+(\d+)(.*)$", code)
+if len(code) == 0: print("ERROR: no code") ; quit() # makes sure there's actually code
+if code[0].isdecimal(): # if theres a header... this assumes that if the first chatacter is a number it must be the header and not a comment
+    match = re.match(r"^(\d+)\s+(\d+)(.*)$", code) # splits up the parts
     if match: headerLeft, headerRight, code = match.groups() ; int(headerLeft) ; int(headerRight)
 
-
+    # make the comment stripper here
+if 
 
 
 
@@ -73,3 +74,8 @@ if code[0].isdecimal(): # gets the header, if there is one
 # more validation
 if not code[0].isdecimal(): print("ERROR: invalid start") ; quit()
 if not code.startswith(tuple(validCommands)): print("ERROR: ")
+
+
+
+
+while True:continue # for testing, so python doesnt close immediately when i run it
