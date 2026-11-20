@@ -28,7 +28,7 @@ import re
 
 
 
-validCommands = [
+validCommands = {
     "+",
     "-",
     "(",
@@ -46,7 +46,7 @@ validCommands = [
     "^",
     "'",
     ".",
-    ","]
+    ","}
 
 
 
@@ -61,19 +61,18 @@ validCommands = [
 code = input()
 
 if len(code) == 0: print("ERROR: no code") ; quit() # makes sure there's actually code
-if code[0].isdecimal(): # if theres a header... this assumes that if the first chatacter is a number it must be the header and not a comment
+if code[0].isdecimal(): # if theres a header... this assumes that if the first character is a number it must be the header and not a comment
     match = re.match(r"^(\d+)\s+(\d+)(.*)$", code) # splits up the parts
     if match: headerLeft, headerRight, code = match.groups() ; int(headerLeft) ; int(headerRight)
 
-    # make the comment stripper here
-if 
+code = ''.join(char for char in code if char in validCommands)
+
+print(code)
 
 
 
 
-# more validation
-if not code[0].isdecimal(): print("ERROR: invalid start") ; quit()
-if not code.startswith(tuple(validCommands)): print("ERROR: ")
+
 
 
 
