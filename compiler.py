@@ -50,6 +50,8 @@ validCommands = {
 
 
 
+loopStack = []
+
 
 
 
@@ -60,21 +62,31 @@ validCommands = {
 
 code = input()
 
-if len(code) == 0: print("ERROR: no code") ; quit() # makes sure there's actually code
+if len(code) == 0: print("ERROR: no code") ; quit() # quits if there's no code
 if code[0].isdecimal(): # if theres a header... this assumes that if the first character is a number it must be the header and not a comment
     match = re.match(r"^(\d+)\s+(\d+)(.*)$", code) # splits up the parts
-    if match: headerLeft, headerRight, code = match.groups() ; int(headerLeft) ; int(headerRight)
+    if match: headerLeft, headerRight, code = match.groups() ; headerLeft = int(headerLeft) ; headerRight = int(headerRight)
+    else: headerLeft = headerRight = 0
+else:
+    headerLeft = headerRight = 0
 
 code = ''.join(char for char in code if char in validCommands)
 
-print(code)
+
+for i in range(len(code)):
+    if code[i] == "[": loopStack.append("]") # if the start of a pointer loop is found, push its inverse to the loop stack
+    if code[i] == "{": loopStack.append("}") # same for memory loops
+    if code[i] == "]" or code[i] == "}": # if the end of a loop is found
+        if len(loopStack) == 0: print("ERROR: loop closed when none was opened") ; quit()
+        elif code[i] != loopStack.pop(): print("ERROR: mismatched brackets") ; quit()
 
 
 
 
 
+if len(loopStack) > 0: print("ERROR: unclosed loop") ; quit() # quits if any loops are left open
 
 
 
 
-while True:continue # for testing, so python doesnt close immediately when i run it
+
